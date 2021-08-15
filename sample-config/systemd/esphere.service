@@ -1,0 +1,18 @@
+[Unit]
+Description=ESP Sphere an OverTheAirManager
+After=syslog.target
+
+[Service]
+Type=notify
+User=www-data
+Group=www-data
+RuntimeDirectory=esphere
+WorkingDirectory=/var/www/esphere
+ExecStart=<YOUR VIRTUAL PYHTONE ENV>/bin/gunicorn esphere.wsgi
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
